@@ -6,6 +6,14 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: 'xg7lbk8sfmzs',
+        accessToken: '315d9ab73fe1c8b4730aaa408d7298bb971cbcd0dd95de7ff56170edc17abbeb',
+      },
+
+    },
     'gatsby-plugin-sass',
     {
       // keep as first gatsby-source-filesystem plugin for gatsby image support
