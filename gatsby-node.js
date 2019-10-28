@@ -4,7 +4,54 @@ const { createFilePath } = require('gatsby-source-filesystem')
 const { fmImagesToRelative } = require('gatsby-remark-relative-images')
 
 exports.createPages = ({ actions, graphql }) => {
-  const { createPage } = actions
+  const { createPage }  = actions;
+  const adTemplate      = path.resolve('src/templates/ad.jsx');
+
+
+
+
+
+  // Individual univers pages with pagination on ads
+  const ads = graphql(`
+  {
+    allAds:allContentfulAd {
+      edges {
+        node {
+          id
+          slug
+          refUnivers{
+            contentful_id
+          }
+        }
+      }
+    }
+  }
+  `).then(result => {
+  if (result.errors) {
+    Promise.reject(result.errors);
+  }
+
+  // Create univers pages
+  const allAds      = result.data.allAds.edges;
+  const adsPerPage  = 40;
+
+  // Create ad pages
+    allAds.forEach((edge) => {
+      createPage({
+        path: edge.node.slug,
+        component: adTemplate,
+        context: {
+          slug: edge.node.slug,
+          universSlug: edge.node.refUnivers.slug
+        }
+      });
+    });
+    
+  });
+
+
+
+
 
   return graphql(`
     {
