@@ -1,4 +1,5 @@
 module.exports = {
+  siteUrl: 'https://netlify.olivierlivet.net',
   siteMetadata: {
     title: 'Gatsby + Netlify CMS Starter',
     description:
@@ -6,6 +7,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-robots-txt',
     {
       resolve: `gatsby-source-contentful`,
       options: {
